@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration>
+
+<configuration debug="true">
+    <contextName>test</contextName>
+    <jmxConfigurator/>
+
+    <appender name="GELF" class="biz.paluch.logging.gelf.logbackaccess.GelfLogbackAccessLogAppender">
+        <graylogHost>test:localhost</graylogHost>
+        <graylogPort>12201</graylogPort>
+        <version>1.1</version>
+        <facility>logstash-gelf</facility>
+        <maximumMessageSize>8192</maximumMessageSize>
+        <additionalFields>fieldName1=fieldValue1,fieldName2=fieldValue2</additionalFields>
+        <messagePatternLayout>%h %l %u [%t{ISO8601}] "%r" %s %b "%i{Referer}" "%i{User-Agent}"</messagePatternLayout>
+    </appender>
+    
+    <appender-ref ref="GELF" />
+    
+</configuration>

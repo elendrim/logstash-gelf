@@ -1,6 +1,8 @@
 logstash-gelf
 =========================
               
+** This fork implement Logback Access for Tomcat 9 **
+** This fork also use JDK8 **
 
 **This project is now archived, after a decade of maintenance, with 36 releases and several occasional contributors. The project is feature complete, and we see little issue traffic. With me being the sole maintainer, it is about time to turn off the lights here and move on to free up time for other duties. K, thx, good bye.**
 
@@ -8,7 +10,7 @@ logstash-gelf
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/biz.paluch.logging/logstash-gelf/badge.svg)](https://maven-badges.herokuapp.com/maven-central/biz.paluch.logging/logstash-gelf)
 
-Provides logging to logstash using the Graylog Extended Logging Format ([GELF](http://www.graylog2.org/resources/gelf/specification) 1.0 and 1.1) for using with:
+Provides logging to logstash using the Graylog Extended Logging Format ([GELF](https://go2docs.graylog.org/current/getting_in_log_data/gelf.html) 1.0 and 1.1) for using with:
 
 * [Java Util Logging](#java-util-logging-gelf-configuration)
 * [Glassfish/Payara](#glassfishpayara-configuration)
@@ -16,9 +18,14 @@ Provides logging to logstash using the Graylog Extended Logging Format ([GELF](h
 * [WildFly](#wildfly-configuration)
 * [Thorntail (WildFly Swarm 2.x)](#thorntail-wildfly-swarm-2x-configuration)
 * [Logback](#logback-gelf-configuration)
+* [Logback-Access](#logback-access-gelf-configuration)
 
-`logstash-gelf` requires as of version 1.14.0 Java 7 or higher. Version 1.13.x and older require Java 6.
-See also http://logging.paluch.biz/ or http://www.graylog2.org/resources/gelf/specification for further documentation.
+`logstash-gelf` requires as of :
+- version 1.16.0 Java 8 or higher. 
+- version 1.14.0 Java 7 or higher. 
+- Version 1.13.x and older require Java 6.
+
+See also http://logging.paluch.biz/ or https://go2docs.graylog.org/current/getting_in_log_data/gelf.html for further documentation.
 
 
 Including it in your project
@@ -450,6 +457,40 @@ logback.xml Example:
     <root level="DEBUG">
         <appender-ref ref="gelf" />
     </root>
+</configuration>
+```
+
+Logback Access GELF configuration for Tomcat 9
+--------------------------
+
+Compatible with logback-access 1.2.10 and Tomcat 9 (But not with newer version of logback-access 2.0.0 who include supports of Tomcat 10, 11 and Jetty 11 and 12).
+
+logback-access.xml Example:
+
+```xml
+<!DOCTYPE configuration>
+
+<configuration>
+    <contextName>test</contextName>
+    <jmxConfigurator/>
+
+    <appender name="gelf" class="biz.paluch.logging.gelf.logbackaccess.GelfLogbackAccessLogAppender">
+        <host>udp:localhost</host>
+        <port>12201</port>
+        <version>1.1</version>
+        <facility>java-test</facility>
+        <maximumMessageSize>8192</maximumMessageSize>
+        <messagePatternLayout>combined</messagePatternLayout>
+        
+        <!-- This are static fields -->
+        <additionalFields>fieldName1=fieldValue1,fieldName2=fieldValue2</additionalFields>
+        <!-- Optional: Specify field types -->
+        <additionalFieldTypes>fieldName1=String,fieldName2=Double,fieldName3=Long</additionalFieldTypes>
+        
+    </appender>
+
+    <appender-ref ref="gelf" />
+    
 </configuration>
 ```
 

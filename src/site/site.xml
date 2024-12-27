@@ -22,6 +22,7 @@
                   href="examples/wildfly-json.html"/>
             <item name="Thorntail (WildFly Swarm)" href="examples/wildfly-swarm-thorntail.html" />
             <item name="Logback" href="examples/logback.html" />
+            <item name="Logback-access for Tomcat 9" href="examples/logback-access-tomcat9.html" />
         </menu>
 
         <menu name="Documentation">

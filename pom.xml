@@ -46,8 +46,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.target>1.7</maven.compiler.target>
-        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
         <logstash-gelf-release-version>1.15.1</logstash-gelf-release-version>
 
         <github.site.upload.skip>true</github.site.upload.skip>
@@ -64,9 +64,11 @@
         <commons-pool2.version>2.11.1</commons-pool2.version>
         <slf4j-api.version>1.7.25</slf4j-api.version>
         <logback-classic.version>1.2.10</logback-classic.version>
+        <logback-access.version>1.2.10</logback-access.version>
         <org.jboss.logmanager.version>1.5.2.Final</org.jboss.logmanager.version>
         <arquillian.version>1.5.0.Final</arquillian.version>
         <org.wildfly.arquillian.version>2.2.0.Final</org.wildfly.arquillian.version>
+        <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
 
         <site-plugin.version>3.10.0</site-plugin.version>
         <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
@@ -345,6 +347,20 @@
             <version>${logback-classic.version}</version>
             <scope>provided</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-access</artifactId>
+            <version>${logback-access.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        
+       <dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>${javax.servlet-api.version}</version>
+		    <scope>provided</scope>
+		</dependency>
 
         <!-- Test -->
         <dependency>
